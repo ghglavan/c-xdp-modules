@@ -1,4 +1,4 @@
-XDP_TARGETS = xdp_redirect
+XDP_TARGETS = xdp_redirect xdp_sni
 
 LLC ?= llc
 CLANG ?= clang
@@ -8,6 +8,11 @@ CFLAGS := -g -Wall -Iheaders
 
 XDP_C = ${XDP_TARGETS:=.c}
 XDP_OBJ = ${XDP_C:.c=.o}
+
+all: $(XDP_OBJ)
+
+clean:
+	rm *.o *.ll
 
 $(XDP_OBJ): %.o: %.c  Makefile
 	$(CLANG) -S \

@@ -66,3 +66,5 @@ int xdp_redirect_map_func(struct xdp_md *ctx)
 out:
     return action;
 }
+
+char _license[] SEC("license") = "GPL";
