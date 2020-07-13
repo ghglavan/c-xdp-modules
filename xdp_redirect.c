@@ -63,6 +63,13 @@ int xdp_redirect_map_func(struct xdp_md *ctx)
     memcpy(eth->h_dest, dst, ETH_ALEN);
     action = bpf_redirect_map(&tx_port, 0, 0);
 
+    if (action == XDP_PASS)
+    {
+        bpf_tail_call(ctx, &xdp_progs_map, 0);
+    }
+
 out:
     return action;
 }
+
+char _license[] SEC("license") = "GPL";
