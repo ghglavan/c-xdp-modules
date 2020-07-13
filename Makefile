@@ -1,6 +1,6 @@
 MAKEFLAGS += --no-builtin-rules
 
-XDP_TARGETS = xdp_redirect ip_blacklister
+XDP_TARGETS = xdp_redirect ip_blacklister xdp_sni
 
 LLC ?= llc
 CLANG ?= clang
@@ -12,6 +12,9 @@ XDP_C = ${XDP_TARGETS:=.c}
 XDP_OBJ = ${XDP_C:.c=.o}
 
 all: $(XDP_OBJ)
+
+clean:
+	rm *.o *.ll
 
 $(XDP_OBJ): %.o: %.c  Makefile
 	$(CLANG) -S \
